@@ -17,7 +17,7 @@ module Forecast
       url = "/#{url_name}"
       url << "?#{uri.query}" if query.any?
 
-      @all ||= connection.get(url).body[url_name].map do |attributes|
+      @all = connection.get(url).body[url_name].map do |attributes|
         new(attributes)
       end
     end
