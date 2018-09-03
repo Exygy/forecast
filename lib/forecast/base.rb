@@ -6,20 +6,29 @@ module Forecast
       Forecast.connection
     end
 
-    def self.url_name
-      self.name.demodulize.underscore.pluralize
+    def self.url_single_name
+      self.name.demodulize.underscore
+    end
+
+    def self.url_plural_name
+      self.url_single_name.pluralize
     end
 
     def self.all(query = {})
       uri = Addressable::URI.new
       uri.query_values = query
 
-      url = "/#{url_name}"
+      url = "/#{url_plural_name}"
       url << "?#{uri.query}" if query.any?
 
-      @all = connection.get(url).body[url_name].map do |attributes|
+      @all = connection.get(url).body[url_plural_name].map do |attributes|
         new(attributes)
       end
+    end
+
+    def self.get(id)
+      url = "/#{url_plural_name}/#{id}"
+      new(connection.get(url).body[url_single_name])
     end
 
     def initialize(attributes = {})

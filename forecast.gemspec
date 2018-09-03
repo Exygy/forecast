@@ -4,7 +4,7 @@ require 'forecast/version'
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'forecast'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
 
   s.summary     = 'A Ruby wrapper for the Harvest Forecast API'
   s.description = s.summary
